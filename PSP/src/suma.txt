@@ -1,0 +1,8 @@
+Escrito 6
+Escrito 2
+Escrito 7
+Escrito 23
+Escrito 674
+Escrito 25
+Escrito 6548
+La suma es: 7285.0

@@ -12,7 +12,7 @@ public class PedirNumeros {
         File error = new File("src", "error.txt");
 
         try {
-            ProcessBuilder pb = new ProcessBuilder("java", "-cp", ruta, "main.SumaNumeros");
+            ProcessBuilder pb = new ProcessBuilder("java", "-cp", ruta, "practicaMultiprocesoIII.SumaNumeros");
             pb.redirectInput(datos);
             pb.redirectOutput(suma);
             pb.redirectError(error);
@@ -25,7 +25,7 @@ public class PedirNumeros {
                 System.err.println("Ha ocurrido un error. Revisa error.txt");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 		
 	}
