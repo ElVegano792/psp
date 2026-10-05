@@ -1,12 +1,24 @@
 package practicaMultiprocesoIII;
 
+import java.util.Scanner;
+
 public class Validador {
     public static void main(String[] args) {
-        if (args.length == 0 || args[0].trim().isEmpty()) {
+    	
+    	Scanner sc = new Scanner(System.in);
+
+        if (!sc.hasNextLine()) {
+            sc.close();
+            System.exit(-1);
+        }
+        String linea = sc.nextLine().trim();
+        sc.close();
+
+        if (linea.isEmpty()) {
             System.exit(-1);
         }
         try {
-            int n = Integer.parseInt(args[0].trim());
+            int n = Integer.parseInt(linea);
             if (n > 0) {
                 System.exit(-3);
             } else {

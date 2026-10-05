@@ -7,44 +7,35 @@ import java.util.Scanner;
 public class Pedir {
     public static void main(String[] args) {
         String ruta = "bin";
-        Scanner teclado = new Scanner(System.in);
-
-        System.out.print("Introduce un número entero positivo: ");
-        String dato = teclado.nextLine();
-        
-//        Partiendo del ejercicio 1 de la práctica anterior, realiza los cambios necesarios para que la
-//        entrada al primer programa se haga a partir de un fichero llamado dato.txt en lugar de
-//        recibirlo por argumento.
+        File fBat = new File("src","ejercicio1Entrada.txt");
         
         try {
-            ProcessBuilder pb = new ProcessBuilder("java", "-cp", ruta, "practicaMultiprocesoIII.Validador",dato);
-//        	ProcessBuilder pb = new ProcessBuilder("java","practicaMultiprocesoIII.Validador");
-        	File fBat = new File("..","ejercicio1Entrada.txt");
+        	
+            ProcessBuilder pb = new ProcessBuilder("java", "-cp", ruta,"practicaMultiprocesoIII.Validador");
             pb.redirectInput(fBat);
+        	
             Process p = pb.start();
             int codigo = p.waitFor();
-            FileReader fr = new FileReader(fBat);
+            
 
             switch (codigo) {
-                case -3,252:
+                case -3,253:
                     System.out.println("Has escrito un entero positivo.");
                     break;
-                case 0,255:
+                case 0:
                     System.out.println("El número debe ser positivo.");
                     break;
-                case -1,254:
+                case -1,255:
                     System.out.println("El argumento está vacío.");
                     break;
-                case -2,253:
+                case -2,254:
                     System.out.println("No has escrito un entero.");
                     break;
                 default:
                     System.out.println("Código desconocido: " + codigo);
             }
-            fr.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        teclado.close();
     }
 }
