@@ -9,39 +9,44 @@ import java.io.IOException;
 public class Palindromo {
 
 	public static void main(String[] args) throws IOException {
-		
-//		Partiendo del ejercicio 3 de la práctica anterior, realiza los cambios necesarios para que la
-//		entrada al primer programa se haga a partir de un fichero llamado texto.txt en lugar de pedir
-//		por consola y las salidas se redirijan a ficheros llamados palindromo.txt y error.txt.
-		
-		String ruta = "bin";
-        File datos = new File("src", "texto.txt");
-        File salida = new File("src", "palindromo.txt");
-        File error = new File("src", "error.txt");
-        
-        try {
+
+		File datos = new File("src", "texto.txt");
+		File salida = new File("src", "palindromo.txt");
+		File error = new File("src", "error.txt");
+
+		FileWriter ficheroError = new FileWriter(error);
+		int codigo = 0;
+
+		try {
 			FileReader lectura = new FileReader(datos);
-			FileWriter escrito = new FileWriter(salida);
-			while(lectura.read()!=0) {
-				
-				String limpia = lectura.toString().toLowerCase().replaceAll("[^a-z0-9áéíóúüñ]", "");
-				String inversa = new StringBuilder(limpia).reverse().toString();
-				
-				if (limpia.equals(inversa)) {
-					escrito.write(limpia + " es palindromo.\n");
-					System.out.println(limpia +" es un palindromo.");
-					System.exit(0);
-				} else {
-					escrito.write(limpia + " no es palindromo.\n");
-					System.out.println(limpia + " no es un palindromo.");
-					System.exit(1);
-				}
+
+			int c;
+			StringBuilder texto = new StringBuilder();
+			while ((c = lectura.read()) != -1) {
+				texto.append((char) c);
 			}
-        lectura.close();
-        escrito.close();
-        } catch (FileNotFoundException e) {
-			e.printStackTrace();
+			lectura.close();
+
+			String limpia = texto.toString().toLowerCase().replaceAll("[^a-z0-9áéíóúüñ]", "");
+			String inversa = new StringBuilder(limpia).reverse().toString();
+
+			FileWriter escrito = new FileWriter(salida);
+			if (limpia.equals(inversa)) {
+				escrito.write(limpia + " es palindromo.");
+			} else {
+				escrito.write(limpia + " no es palindromo.");
+				codigo = 1;
+			}
+			escrito.close();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Ha ocurrido un error, guardado en error.txt");
+			ficheroError.write(e.getMessage());
+			codigo = 2;
 		}
+
+		ficheroError.close();
+		System.exit(codigo);
 	} // Fin main
 
 }
