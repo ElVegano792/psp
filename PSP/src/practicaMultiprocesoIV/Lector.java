@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Random;
 
 //	Debe realizar las siguientes operaciones:
 //		Mostrar por consola:
@@ -21,7 +19,6 @@ import java.util.Random;
 
 public class Lector {
     	private static final String FICHERO = "datos.txt";
-    	private static final Random RANDOM = new Random();
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		
@@ -34,36 +31,25 @@ public class Lector {
         File fichero = new File(FICHERO);
         try {
 
-			FileReader fichero1 = new FileReader("/home/alumno/windows.txt"); // Hay que poner la ruta completa y tiene que existir el archivo
+			FileReader fichero1 = new FileReader(FICHERO); // Hay que poner la ruta completa y tiene que existir el archivo
 			// FileReadrt solo permite leer, no grabar
 			
 			// Para imprimir hay que crear un segundo objeto llamado BufferedReader
 			BufferedReader lector = new BufferedReader(fichero1);
-			BufferedReader secundario = new BufferedReader(new FileReader("/home/alumno/windows.txt"));
-			// ^^ Tambien se puede hacer esto por si quieres ahorrar líneas? ^^
 			
-			// Con esto leemos e imprimimos la primera línea del archivo
-//			String linea = lector.readLine();
-//			System.out.println(linea);
-			// ^^ Una vez que el archivo llega al final devuelve un null ^^
+			String linea = "";
 			
-			// Vv Con esto leeríamos todo el fichero vV
+			do {
+				linea = lector.readLine();
+				if(linea != null)
+					System.out.println(linea);
+			} while(linea != null); 
 			
-//			do {
-//				linea = lector.readLine();
-//				if(linea != null)
-//					System.out.println(linea);
-//			} while(linea != null); 
-			
-			// Vv Esto es otra manera de hacerlo vV
-//			String linea;
-//			while((linea = lector.readLine())!=null) {
-//				System.out.println(linea);
-//			}
                 System.out.println("Liberado bloqueo.");
-            
+                
+                lector.close();
         } catch (FileNotFoundException e) {
-            System.err.printf("El fichero no se ha podido crear / abrir: %s\n", e.getMessage());
+            System.err.printf("El fichero no se ha abrir: %s\n", e.getMessage());
             throw new RuntimeException(e);
         } catch(Exception e) {
         	System.out.println("Error: " + e.getMessage());
