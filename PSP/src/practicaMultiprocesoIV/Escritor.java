@@ -18,14 +18,12 @@ public class Escritor {
 
 		try (RandomAccessFile raf = new RandomAccessFile(FICHERO_LOCK, "rw");
 				FileChannel canal = raf.getChannel()) {
-
 			
 			try (FileLock bloqueo = canal.lock();
 					PrintWriter pw = new PrintWriter(new FileWriter(FICHERO))) {
 				
 				System.out.println("Establecido bloqueo para escribir los mensajes...");
 
-				
 				for (int i = 0; i < 10; i++) {
 					pw.println("Mensaje de iteración: " + i);
 					pw.flush();

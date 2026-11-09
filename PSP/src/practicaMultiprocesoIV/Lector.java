@@ -21,11 +21,9 @@ public class Lector {
 				FileChannel canal = raf.getChannel();
 				
 				FileLock bloqueo = canal.lock()) {
-
 			
 			try (BufferedReader lector = new BufferedReader(new FileReader(FICHERO))) {
 
-				
 				String linea;
 				while ((linea = lector.readLine()) != null) {
 					System.out.println("Lector: " + linea);

@@ -21,6 +21,7 @@ public class Main {
 
 		escritor.waitFor();
 		lector.waitFor();
+		
 	}
 
 }
