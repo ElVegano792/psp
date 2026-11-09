@@ -21,7 +21,7 @@ public class Equipo extends Thread {
 				corredor.start();
 				corredor.join();
 			}
-			System.out.println("FINAL DE PROGRAMA - " + nombre);
+			System.out.println("Fin - " + nombre);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 			System.out.println("Carrera interrumpida - " + nombre);
