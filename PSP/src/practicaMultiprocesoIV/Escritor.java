@@ -1,57 +1,49 @@
 package practicaMultiprocesoIV;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.util.Random;
-import java.io.FileOutputStream;
 
 public class Escritor {
 
-//	Debe realizar las siguientes operaciones:
-//		1. Crear o abrir el fichero datos.lock.
-//		2. Obtener un FileChannel asociado al fichero de bloqueo.
-//		3. Obtener un bloqueo mediante FileLock.
-//		4. Mostrar por consola un mensaje indicando que se ha establecido el bloqueo.
-//		5. Mientras mantenga el bloqueo, escribir 10 mensajes en datos.txt.
-//		6. Después de escribir cada mensaje:
-//		7. Mostrar por consola qué mensaje se ha escrito.
-//		8. Esperar un tiempo aleatorio entre 1 y 1,5 segundos.
-//		9. Cuando termine de escribir los 10 mensajes, liberar el bloqueo.
-//		10. Mostrar por consola que el bloqueo ha sido liberado
-
 	private static final String FICHERO = "datos.txt";
+	private static final String FICHERO_LOCK = "datos.lock";
 	private static final Random RANDOM = new Random();
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) {
 
-		File lock = new File("datos.lock");
-		while (!lock.createNewFile()) {
-			Thread.sleep(100);
-		}
-		System.out.println("Establecido bloqueo para escribir los mensajes...");
+		try (RandomAccessFile raf = new RandomAccessFile(FICHERO_LOCK, "rw");
+				FileChannel canal = raf.getChannel()) {
 
-		File fichero = new File(FICHERO);
-		try (PrintWriter pw = new PrintWriter(new FileOutputStream(fichero))) {
 			
-			pw.flush();
-			for (int i = 0; i < 10; i++) {
-				long sleepTime = RANDOM.nextLong(1000, 1500);
-				System.out.println("Lector: Escrito mensaje de iteracion " + i);
-				pw.printf("Mensaje de iteracion %d\n", i);
-				Thread.sleep(sleepTime);
+			try (FileLock bloqueo = canal.lock();
+					PrintWriter pw = new PrintWriter(new FileWriter(FICHERO))) {
+				
+				System.out.println("Establecido bloqueo para escribir los mensajes...");
+
+				
+				for (int i = 0; i < 10; i++) {
+					pw.println("Mensaje de iteración: " + i);
+					pw.flush();
+	
+					System.out.println("Escritor: Escrito mensaje de iteración " + i);
+					
+					Thread.sleep(1000 + RANDOM.nextInt(501));
+				}	
 			}
+
 			System.out.println("Liberado bloqueo.");
 
-		} catch (FileNotFoundException e) {
-			System.err.printf("El fichero no se ha podido crear / abrir: %s\n", e.getMessage());
-			throw new RuntimeException(e);
 		} catch (InterruptedException e) {
-			System.err.printf("El proceso ha sido interrumpido: %s\n", e.getMessage());
-			throw new RuntimeException(e);
+			Thread.currentThread().interrupt();
+			System.err.println("El proceso ha sido interrumpido: " + e.getMessage());
+		} catch (IOException e) {
+			System.err.println("Error de entrada/salida: " + e.getMessage());
 		}
-		lock.delete();
 	}
 
 } // Fin clase
