@@ -46,7 +46,7 @@ public class Bomba implements Runnable {
 				System.out.println("El artificiero ha perecido.");
 			}
 		} catch (InterruptedException e) {
-			System.out.println("El artificiero ha muerto.");
+			System.out.println("El artificiero ha perecido.");
 		}
 	}
 
