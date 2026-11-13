@@ -1,12 +1,16 @@
 package practicaMultiHiloIII;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 public class Ejercicio1 {
-
+	
+	public Integer maximoNaufragosPorBarca = 15;
+	public static int totalBarcas = 5;
+	
 	public static void main(String[] args) {
-		
-		final int totalBarcas = 5;
 		
 //		En una isla hay unos náufragos. Su número al detalle no se conoce, pero están entre 800 y
 //		1.000.
@@ -26,11 +30,30 @@ public class Ejercicio1 {
 //		Los hilos deben arrancarse con la interfaz ExecutorService y deben pararse cuando el
 //		rescate haya concluido. El contador también debe parar cuando el rescate haya concluído.
 		
+		// Cada barca es un hilo
+		
 		Random random = new Random();
 		int totalNaufragos = random.nextInt(800,1000);
-		final int maximoNaufragosPorBarca = 15;
+		int tiempoVuelta = random.nextInt(1800,2000);
 		
+		Semaphore miSemaforo = new Semaphore(2);
+		Playa playa = new Playa(miSemaforo);
+		ExecutorService miExecutor = Executors.newFixedThreadPool(totalBarcas);
+		
+		while(totalNaufragos>=0) {
+			for(int i=0; i<totalBarcas; i++ ) {
+				miExecutor.submit(new Hilo(playa));
+				if(totalNaufragos < 0)
+					totalNaufragos = 0;
+				int tiempoEspera = random.nextInt(2000,3000);
+			System.out.println("Quedan " + totalNaufragos + " náufragos");
+			totalNaufragos-=15;
+						
+			}
+		}
+		
+		miExecutor.shutdown();
 		
 	}
-
+	
 }
