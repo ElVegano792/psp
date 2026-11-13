@@ -10,7 +10,7 @@ public class Cola {
 		this.miSemaforo = miSemaforo;
 	}
 	
-	public void pasar(String nombre) {				
+	public void pasar (String nombre) {				
 		try {
 			System.out.println("ESPERANDO semaforo hilo:" + nombre);
 			this.miSemaforo.acquire();
