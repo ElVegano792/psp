@@ -29,14 +29,15 @@ public class Ejercicio1 {
 		Thread hilo4 = new Thread();
 		Thread hilo5 = new Thread();
 		
-		while(totalNaufragos!=0) {
+		while(totalNaufragos>=0) {
 			for(int i=0; i<totalBarcas; i++ ) {
 				miExecutor.submit(new Hilo(playa));
-				if(totalNaufragos < 0)
-					totalNaufragos = 0;
+				
 				long tiempoEspera = random.nextInt(2000,3000);
-				if(totalNaufragos <= 15)
+				if(totalNaufragos <= 15) {
 					naufragosSalvados+=totalNaufragos;
+					totalNaufragos = 0;
+				}
 				else
 					naufragosSalvados+=15;
 			System.out.println("Quedan " + totalNaufragos + " náufragos");
