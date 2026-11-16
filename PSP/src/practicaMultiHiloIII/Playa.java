@@ -19,18 +19,18 @@ public class Playa {
 			// 1
 			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
-			// 2
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
-			Thread.sleep(random.nextInt(2000,3000));
-			// 3
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
-			Thread.sleep(random.nextInt(2000,3000));
-			// 4
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
-			Thread.sleep(random.nextInt(2000,3000));
-			// 5
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
-			Thread.sleep(random.nextInt(2000,3000));
+//			// 2
+//			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
+//			Thread.sleep(random.nextInt(2000,3000));
+//			// 3
+//			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
+//			Thread.sleep(random.nextInt(2000,3000));
+//			// 4
+//			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
+//			Thread.sleep(random.nextInt(2000,3000));
+//			// 5
+//			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
+//			Thread.sleep(random.nextInt(2000,3000));
 			
 		} catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());
