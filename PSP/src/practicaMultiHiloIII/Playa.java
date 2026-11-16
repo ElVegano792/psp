@@ -17,19 +17,19 @@ public class Playa {
 			System.out.println("ESPERANDO semaforo hilo:" + nombre);
 			this.miSemaforo.acquire();
 			// 1
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos ");
+			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
 			// 2
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos ");
+			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
 			// 3
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos ");
+			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
 			// 4
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos ");
+			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
 			// 5
-			System.out.println("La balsa actual es: " + nombre + " y rescatamos ");
+			System.out.println("La balsa actual es: " + nombre + " y rescatamos " + Ejercicio1.getNaufragosRescatados());
 			Thread.sleep(random.nextInt(2000,3000));
 			
 		} catch (Exception e) {
